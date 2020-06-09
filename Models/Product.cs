@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace MentorsBackEnd.Models
+{
+    public class Product
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        [BsonElement("idProduct")]
+        public int IdProduct { get; set; }
+
+        [BsonElement("name")]
+        public string Name { get; set; }
+
+        [BsonElement("price")]
+        public decimal Price { get; set; }
+
+        [BsonElement("image")]
+        public string Image { get; set; }
+
+    }
+}
