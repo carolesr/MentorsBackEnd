@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MentorsBackEnd.Models;
 using MentorsBackEnd.Service;
+using MentorsBackEnd.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +24,7 @@ namespace MentorsBackEnd
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,8 +38,21 @@ namespace MentorsBackEnd
                 sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
             services.AddSingleton<ProductService>();
+            services.AddSingleton<UserService>();
 
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:19006", "http://192.168.0.22:19006/")
+                           .AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +62,8 @@ namespace MentorsBackEnd
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
