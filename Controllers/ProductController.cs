@@ -32,7 +32,6 @@ namespace MentorsBackEnd.Controllers
 
 
         [HttpGet("Get{id}")]
-        //[Route("teste/")]
         public ActionResult<Product> Get(int id)
         {
             return _productService.Get(id);
