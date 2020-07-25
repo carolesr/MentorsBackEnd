@@ -22,8 +22,10 @@ namespace MentorsBackEnd.Services
         public List<User> GetAll() =>
             _user.Find(user => true).ToList();
 
-        public User Get(int id) =>
-            _user.Find(user => user.idUser == id).FirstOrDefault();
+        public User Get(int id)
+        {
+            return  _user.Find(user => user.IdCard == id).FirstOrDefault();
+        }
 
         public User Create(User u)
         {
@@ -35,7 +37,7 @@ namespace MentorsBackEnd.Services
         public void Update(User u)
         {
             if (u != null)
-                _user.ReplaceOne(user => user.idUser == u.idUser, u);
+                _user.ReplaceOne(user => user.IdUser == u.IdUser, u);
         }
     }
 }

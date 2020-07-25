@@ -12,10 +12,10 @@ namespace MentorsBackEnd.Models
 
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string IdUser { get; set; }
 
-        [BsonElement("idUser")]
-        public int idUser { get; set; }
+        [BsonElement("id_card")]
+        public int IdCard { get; set; }
 
         [BsonElement("username")]
         public string Username { get; set; }

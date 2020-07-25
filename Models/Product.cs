@@ -11,11 +11,8 @@ namespace MentorsBackEnd.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        [BsonElement("idProduct")]
-        public int IdProduct { get; set; }
-
+        public string IdProduct { get; set; }
+        
         [BsonElement("name")]
         public string Name { get; set; }
 

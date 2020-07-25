@@ -31,8 +31,8 @@ namespace MentorsBackEnd.Controllers
             _productService.GetAll();
 
 
-        [HttpGet("Get{id}")]
-        public ActionResult<Product> Get(int id)
+        [HttpGet("Get/{id}")]
+        public ActionResult<Product> Get(string id)
         {
             return _productService.Get(id);
         }

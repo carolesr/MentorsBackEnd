@@ -31,13 +31,13 @@ namespace MentorsBackEnd.Controllers
             return _userService.GetAll();
         }
 
-        [HttpGet("Get{id}")]
+        [HttpGet("Get")]
         public ActionResult<User> Get(int id)
         {
             return _userService.Get(id);
         }
 
-        [HttpPost("Create{u}")]
+        [HttpPost("Create")]
         public ActionResult<User> Create(User u)
         {
             return _userService.Create(u);

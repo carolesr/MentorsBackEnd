@@ -22,7 +22,7 @@ namespace MentorsBackEnd.Service
         public List<Product> GetAll() =>
             _product.Find(product => true).ToList();
 
-        public Product Get(int id) =>
+        public Product Get(string id) =>
             _product.Find<Product>(product => product.IdProduct == id).FirstOrDefault();
     }
 }
