@@ -1,11 +1,7 @@
-﻿//using Microsoft.AspNetCore.Components;
-using MentorsBackEnd.Models;
+﻿using MentorsBackEnd.Models;
 using MentorsBackEnd.Service;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MentorsBackEnd.Controllers
 {

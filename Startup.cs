@@ -39,6 +39,7 @@ namespace MentorsBackEnd
 
             services.AddSingleton<ProductService>();
             services.AddSingleton<UserService>();
+            services.AddSingleton<PurchaseService>();
 
             services.AddControllers();
 

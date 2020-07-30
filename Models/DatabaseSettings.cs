@@ -9,6 +9,7 @@ namespace MentorsBackEnd.Models
     {        
         public string ProductCollectionName { get; set; }
         public string UserCollectionName { get; set; }
+        public string PurchaseCollectionName { get; set; }
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
     }
@@ -17,6 +18,7 @@ namespace MentorsBackEnd.Models
     {
         string ProductCollectionName { get; set; }
         string UserCollectionName { get; set; }
+        string PurchaseCollectionName { get; set; }
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
     }
