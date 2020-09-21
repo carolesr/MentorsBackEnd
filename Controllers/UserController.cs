@@ -2,6 +2,7 @@
 using MentorsBackEnd.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using MentorsBackEnd.Hubs;
 
 namespace MentorsBackEnd.Controllers
 {
@@ -38,6 +39,12 @@ namespace MentorsBackEnd.Controllers
         public ActionResult<User> Create(User u)
         {
             return _userService.Create(u);
+        }
+
+        [HttpGet("TesteSignalR")]
+        public System.Threading.Tasks.Task TesteSignalR()
+        {
+            return _userService.SendNotificationAsync("teste");
         }
     }
 }

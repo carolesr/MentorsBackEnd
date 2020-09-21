@@ -34,6 +34,6 @@ namespace MentorsBackEnd
         //            .UseUrls("http://*:" + port);
         //        });
         //}
-
+        //docker build --rm -f "Dockerfile" -t "cinqbreak" .
     }
 }

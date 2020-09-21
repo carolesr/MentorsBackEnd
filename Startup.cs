@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MentorsBackEnd.Models;
 using MentorsBackEnd.Service;
 using MentorsBackEnd.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MentorsBackEnd.Hubs;
 
 namespace MentorsBackEnd
 {
@@ -42,18 +36,7 @@ namespace MentorsBackEnd
             services.AddSingleton<PurchaseService>();
 
             services.AddControllers();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:19006", "http://192.168.0.22:19006/")
-                           .AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-            });
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,9 +47,13 @@ namespace MentorsBackEnd
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors(builder => builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .SetIsOriginAllowed(_ => true)
+                    .AllowCredentials());    
 
-            app.UseHttpsRedirection();
+             app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -75,6 +62,7 @@ namespace MentorsBackEnd
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<AppHub>("/hub");
             });
         }
     }
