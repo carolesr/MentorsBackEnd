@@ -26,5 +26,8 @@ namespace MentorsBackEnd.Models
         [BsonElement("cart")]
         public List<Cart> Cart { get; set; }
 
+        [BsonElement("pending")]
+        public string Pending { get; set; }
+
     }
 }

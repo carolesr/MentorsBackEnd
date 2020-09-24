@@ -25,10 +25,10 @@ namespace MentorsBackEnd.Controllers
             _purchaseService.GetAll();
 
 
-        [HttpPost("Create")]
-        public ActionResult<Purchase> Create(Purchase p)
+        [HttpPost("CreatePurchase")]
+        public ActionResult<Purchase> CreatePurchase(Purchase p)
         {
-            return _purchaseService.Create(p);
+            return _purchaseService.CreatePurchase(p);
         }
     }
 }

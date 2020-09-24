@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MentorsBackEnd.Hubs;
 using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
 
 namespace MentorsBackEnd.Services
 {
@@ -12,6 +11,7 @@ namespace MentorsBackEnd.Services
     {
         private readonly IMongoCollection<User> _user;
         private readonly IHubContext<AppHub> _hub;
+        private readonly PurchaseService _purchaseService;
 
         public UserService(IDatabaseSettings settings, IHubContext<AppHub> hub)
         {
@@ -20,6 +20,7 @@ namespace MentorsBackEnd.Services
 
             _user = database.GetCollection<User>(settings.UserCollectionName);
             _hub = hub;
+            _purchaseService = new PurchaseService(settings);
         }
 
         public List<User> GetAll() =>
@@ -30,22 +31,41 @@ namespace MentorsBackEnd.Services
             return  _user.Find(user => user.IdCard == id).FirstOrDefault();
         }
 
-        public User Create(User u)
+        public User CreateUser(User u)
         {
-            if (u != null)
-                _user.InsertOne(u);
+            _user.InsertOne(u);
+            UpdatePurchase(u.IdUser);
             return u;
         }
 
-        public void Update(User u)
+        public void VerifyUser(int idCard)
         {
-            if (u != null)
-                _user.ReplaceOne(user => user.IdUser == u.IdUser, u);
+            var user = _user.Find(user => user.IdCard == idCard).FirstOrDefault();
+            if (user != null)
+                UpdatePurchase(user.IdUser);
+            else
+                SendNotificationLogin(idCard.ToString());
         }
 
-        public Task SendNotificationAsync(string message)
+        public void UpdatePurchase(string idUser)
         {
-            return _hub.Clients.All.SendAsync("ReceiveMessage", message);
+            _purchaseService.UpdatePurchase(idUser);
+            SendNotificationFinish("Success");
+        }
+
+        public void SendNotificationLogin(string idCard)
+        {
+            _hub.Clients.All.SendAsync("Login", idCard);
+        }
+
+        public void SendNotificationFinish(string idCard)
+        {
+            _hub.Clients.All.SendAsync("Finish", idCard);
+        }
+
+        public void TesteSignalR(string idCard)
+        {
+            _hub.Clients.All.SendAsync("Teste", idCard);
         }
     }
 }

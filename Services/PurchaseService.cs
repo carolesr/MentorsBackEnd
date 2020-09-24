@@ -20,11 +20,22 @@ namespace MentorsBackEnd.Services
         public List<Purchase> GetAll() =>
             _purchase.Find(purchase => true).ToList();
 
-        public Purchase Create(Purchase p)
+        public Purchase CreatePurchase(Purchase p)
         {
             if (p != null)
                 _purchase.InsertOne(p);
             return p;
+        }
+
+        public void UpdatePurchase(string idUser)
+        {
+            var purchase = _purchase.Find(p => p.Pending == "true").SortByDescending(x => x.IdPurchase).FirstOrDefault();
+            if (purchase != null)
+            {
+                purchase.IdUser = idUser;
+                purchase.Pending = "false";
+                _purchase.ReplaceOne(pur => pur.IdPurchase == purchase.IdPurchase, purchase);
+            }            
         }
             
     }
