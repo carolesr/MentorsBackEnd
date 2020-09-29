@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MentorsBackEnd.Models
@@ -11,11 +7,8 @@ namespace MentorsBackEnd.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
-
-        [BsonElement("idProduct")]
-        public int IdProduct { get; set; }
-
+        public string IdProduct { get; set; }
+        
         [BsonElement("name")]
         public string Name { get; set; }
 

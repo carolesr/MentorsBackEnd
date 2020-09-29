@@ -1,10 +1,7 @@
 ﻿using MentorsBackEnd.Models;
 using MentorsBackEnd.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MentorsBackEnd.Controllers
 {
@@ -22,7 +19,7 @@ namespace MentorsBackEnd.Controllers
         [HttpGet]
         public string Index()
         {
-            return "Welcome to User Controller";
+            return "Hello World User";
         }
 
         [HttpGet("GetAll")]
@@ -31,16 +28,28 @@ namespace MentorsBackEnd.Controllers
             return _userService.GetAll();
         }
 
-        [HttpGet("Get{id}")]
-        public ActionResult<User> Get(int id)
+        [HttpPost("CreateUser")]
+        public ActionResult<User> CreateUser(User u)
         {
-            return _userService.Get(id);
+            return _userService.CreateUser(u);
         }
 
-        [HttpPost("Create{u}")]
-        public ActionResult<User> Create(User u)
+        [HttpPost("DeleteUser")]
+        public void DeleteUser(int idCard)
         {
-            return _userService.Create(u);
+            _userService.DeleteUser(idCard);
+        }
+
+        [HttpPost("VerifyUser")]
+        public void VerifyUser([FromBody] int idCard)
+        {
+            _userService.VerifyUser(idCard);
+        }
+
+        [HttpGet("TesteSignalR")]
+        public void TesteSignalR()
+        {
+            _userService.TesteSignalR("teste");
         }
     }
 }

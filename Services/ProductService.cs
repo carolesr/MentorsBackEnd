@@ -1,9 +1,7 @@
 ﻿using MentorsBackEnd.Models;
 using MongoDB.Driver;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MentorsBackEnd.Service
 {
@@ -22,7 +20,7 @@ namespace MentorsBackEnd.Service
         public List<Product> GetAll() =>
             _product.Find(product => true).ToList();
 
-        public Product Get(int id) =>
+        public Product Get(string id) =>
             _product.Find<Product>(product => product.IdProduct == id).FirstOrDefault();
     }
 }
