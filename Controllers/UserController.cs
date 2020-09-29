@@ -34,8 +34,14 @@ namespace MentorsBackEnd.Controllers
             return _userService.CreateUser(u);
         }
 
+        [HttpPost("DeleteUser")]
+        public void DeleteUser(int idCard)
+        {
+            _userService.DeleteUser(idCard);
+        }
+
         [HttpPost("VerifyUser")]
-        public void VerifyUser(int idCard)
+        public void VerifyUser([FromBody] int idCard)
         {
             _userService.VerifyUser(idCard);
         }

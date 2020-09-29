@@ -37,6 +37,10 @@ namespace MentorsBackEnd.Services
             UpdatePurchase(u.IdUser);
             return u;
         }
+        public void DeleteUser(int idCard)
+        {
+            _user.DeleteOne(user => user.IdCard == idCard);
+        }
 
         public void VerifyUser(int idCard)
         {

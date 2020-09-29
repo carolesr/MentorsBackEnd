@@ -23,5 +23,17 @@ namespace MentorsBackEnd
             {
                 webBuilder.UseStartup<Startup>();
             });
+
+        //{
+        //    var port = Environment.GetEnvironmentVariable("PORT");
+
+        //    return Host.CreateDefaultBuilder(args)
+        //        .ConfigureWebHostDefaults(webBuilder =>
+        //        {
+        //            webBuilder.UseStartup<Startup>()
+        //            .UseUrls("http://*:" + port);
+        //        });
+        //}
+        //docker build --rm -f "Dockerfile" -t "cinqbreak" .
     }
 }
